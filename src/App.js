@@ -43,6 +43,7 @@ class App extends React.Component {
 
     this.searchForAlbum = this.searchForAlbum.bind(this);
     this.getTracks = this.getTracks.bind(this);
+    this.goBack = this.goBack.bind(this);
   }
 
   // sets token
@@ -72,6 +73,13 @@ class App extends React.Component {
         console.log(e);
       }
     })
+  }
+
+  goBack() {
+    this.setState({
+      results: [],
+      tracks: [],
+    });
   }
 
   getTracks(album) {
@@ -105,13 +113,15 @@ class App extends React.Component {
 
       trackFeatures.done((featureData) => {
         for (let i = 0; i < featureData.audio_features.length; i++) {
+          let currentTrack = featureData.audio_features[i]
           _tracks.push({
-            name: trackData.items[i].name,
-            danceability: featureData.audio_features[i].danceability,
-            energy: featureData.audio_features[i].energy,
-            acousticness: featureData.audio_features[i].acousticness,
-            instrumentalness: featureData.audio_features[i].instrumentalness,
-            tempo: featureData.audio_features[i].tempo + ' BPM',
+            name:             trackData.items[i].name,
+            danceability:     currentTrack.danceability,
+            energy:           currentTrack.energy,
+            acousticness:     currentTrack.acousticness,
+            instrumentalness: currentTrack.instrumentalness,
+            valence:          currentTrack.valence,
+            tempo:            currentTrack.tempo + ' BPM',
           })
         }
 
@@ -148,6 +158,7 @@ class App extends React.Component {
           <div>
             <SongList
               tracks={this.state.tracks}
+              goBack={this.goBack}
             />
           </div>
         )}
