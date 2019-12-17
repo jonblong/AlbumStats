@@ -1,0 +1,7 @@
+.song-card {
+  display: flex;
+}
+
+.song-card p {
+  width: 200px;
+}
