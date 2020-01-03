@@ -1,10 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:500,700,700i&display=swap');
+
 .album-card {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+
+  width: 200px;
 
   margin: 10px;
+
+  font-family: 'Montserrat', sans-serif;
+  color: #242423;
 }
 
 .album-card img {
   margin-right: 10px;
+}
+
+.AlbumList {
+  flex: 1;
+  overflow-y: scroll;
+
+  background-color: #dec056;
+}
+
+#albumGrid {
+  display: grid;
+  grid-template-columns: repeat( auto-fill, 400px);
+  grid-gap: 10px;;
+
+  margin-left: 25px;
+}
+
+#searchTerm {
+  margin-left: 35px;
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px;
+  font-style: italic;
+  color: #242423;
+}
+
+#searchTerm span {
+  font-style: normal;
+  font-weight: 700;
 }

@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Shrikhand&display=swap');
+
+#header {
+    height: 100px !important;
+
+    display: flex;
+    align-items: center;
+    background-color: #dec056;
+}
+
+.title {
+    font-family: 'Shrikhand', cursive;
+    color: #242423;
+
+    margin-left: 30px;
+}

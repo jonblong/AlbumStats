@@ -1,10 +1,12 @@
 import React from 'react';
-import './App.css';
 
 import * as $ from "jquery";
+import Header from './components/Header/Header';
 import SearchBar from './components/SearchBar/SearchBar';
 import AlbumList from './components/AlbumList/AlbumList';
 import SongList from './components/SongList/SongList';
+
+import './App.css'
 
 // endpoint for user authorization
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
@@ -38,6 +40,7 @@ class App extends React.Component {
     this.state = {
       token: null,
       results: [],
+      term: '',
       tracks: [],
     }
 
@@ -57,8 +60,10 @@ class App extends React.Component {
   }
 
   searchForAlbum(album) {
+    let formattedAlbumStr = album.replace(/ /g, '%20');
+
     $.ajax({
-      url: `${searchURL}${album}&type=album&market=US`,
+      url: `${searchURL}${formattedAlbumStr}&type=album&market=US`,
       type: "GET",
       beforeSend: (xhr) => {
         xhr.setRequestHeader("Authorization", "Bearer " + this.state.token)
@@ -67,6 +72,7 @@ class App extends React.Component {
         console.log(data)
         this.setState({
           results: data.albums.items,
+          term: album,
         });
       },
       error: (e) => {
@@ -79,6 +85,7 @@ class App extends React.Component {
     this.setState({
       results: [],
       tracks: [],
+      term: '',
     });
   }
 
@@ -133,6 +140,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <Header />
         {!this.state.token && (
           <a
             href={`${authEndpoint}?client_id=${clientID}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`}
@@ -141,17 +149,18 @@ class App extends React.Component {
           </a>
         )}
 
-        {this.state.token && this.state.tracks.length < 1  && (
-          <div>
-            <SearchBar
-              searchForAlbum={this.searchForAlbum}
-            />
+        {this.state.token && this.state.tracks.length < 1  && this.state.results.length === 0 && (
+          <SearchBar
+            searchForAlbum={this.searchForAlbum}
+          />
+        )}
 
-            <AlbumList
-              albums={this.state.results}
-              getTracks={this.getTracks}
-            />
-          </div>
+        {this.state.token && this.state.results.length > 0  && this.state.tracks.length == 0 && (
+          <AlbumList
+            albums={this.state.results}
+            term={this.state.term}
+            getTracks={this.getTracks}
+          />
         )}
 
         {this.state.tracks.length > 0 && (

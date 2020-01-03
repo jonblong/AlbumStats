@@ -1,4 +1,6 @@
 import React from 'react';
+import './SearchBar.css';
+import icon from './search.svg';
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -14,18 +16,21 @@ class SearchBar extends React.Component {
   }
 
   handleSubmit(event) {
-    let formattedAlbumStr = this.state.value.replace(/ /g, '%20');
-    console.log(formattedAlbumStr);
-    this.props.searchForAlbum(formattedAlbumStr);
+    this.props.searchForAlbum(this.state.value);
     event.preventDefault();
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input type='text' value={this.state.value} onChange={this.handleChange} />
-        <input type='submit' value="Search" />
-      </form>
+      <div id='searchPanel'>
+        <form id='search' onSubmit={this.handleSubmit}>
+          <input type='text' placeholder='Search for an album...' value={this.state.value} onChange={this.handleChange} />
+          <label>
+            <input type='submit'/>
+            <img id='searchIcon' src={icon} width='50px'/>
+          </label>
+        </form>
+      </div>
     )
   }
 }
