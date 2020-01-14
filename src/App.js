@@ -2,9 +2,16 @@ import React from 'react';
 
 import * as $ from "jquery";
 import Header from './components/Header/Header';
-import SearchBar from './components/SearchBar/SearchBar';
-import AlbumList from './components/AlbumList/AlbumList';
+import Footer from './components/Footer/Footer';
+
+//OLD
+//import SearchBar from './components/SearchBar/SearchBar';
+//import AlbumList from './components/AlbumList/AlbumList';
 import SongList from './components/SongList/SongList';
+
+//NEW
+import SearchPage from './components/SearchPage/SearchPage';
+import ResultsPage from './components/ResultsPage/ResultsPage';
 
 import './App.css'
 
@@ -16,8 +23,11 @@ const clientID = "75866d496692487bad2a4d1c7eeb8bca";
 const redirectUri = "http://localhost:3000";
 const searchURL = "https://api.spotify.com/v1/search?q="
 const scopes = [
-  "playlist-read-private",
+
 ];
+
+let vh = window.innerHeight * 0.01;
+document.body.style.setProperty('--vh', `${vh}px`);
 
 // hash url
 const hash = window.location.hash
@@ -44,9 +54,11 @@ class App extends React.Component {
       tracks: [],
     }
 
+    // bind functions
     this.searchForAlbum = this.searchForAlbum.bind(this);
     this.getTracks = this.getTracks.bind(this);
     this.goBack = this.goBack.bind(this);
+    this.albumToResults = this.albumToResults.bind(this);
   }
 
   // sets token
@@ -59,6 +71,7 @@ class App extends React.Component {
     }
   }
 
+  // search albums for term, return list of albums
   searchForAlbum(album) {
     let formattedAlbumStr = album.replace(/ /g, '%20');
 
@@ -81,6 +94,14 @@ class App extends React.Component {
     })
   }
 
+  // go from album screen to results screen
+  albumToResults() {
+    this.setState({
+      tracks: ''
+    });
+  }
+
+  // go from results screen to home
   goBack() {
     this.setState({
       results: [],
@@ -89,6 +110,7 @@ class App extends React.Component {
     });
   }
 
+  // go to album screen from results screen
   getTracks(album) {
     let _tracks = [];
     let _token = this.state.token;
@@ -141,6 +163,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
+        {/* SHOW LOGIN PROMPT */}
         {!this.state.token && (
           <a
             href={`${authEndpoint}?client_id=${clientID}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`}
@@ -149,28 +172,34 @@ class App extends React.Component {
           </a>
         )}
 
+        {/* SHOW SEARCH PAGE */}
         {this.state.token && this.state.tracks.length < 1  && this.state.results.length === 0 && (
-          <SearchBar
+          <SearchPage
             searchForAlbum={this.searchForAlbum}
           />
         )}
 
+        {/* SHOW RESULTS PAGE */}
         {this.state.token && this.state.results.length > 0  && this.state.tracks.length == 0 && (
-          <AlbumList
+          <ResultsPage
             albums={this.state.results}
             term={this.state.term}
             getTracks={this.getTracks}
+            goBack={this.goBack}
           />
         )}
 
+        {/* SHOW ALBUM PAGE */}
         {this.state.tracks.length > 0 && (
           <div>
             <SongList
               tracks={this.state.tracks}
-              goBack={this.goBack}
+              goBack={this.albumToResults}
             />
           </div>
         )}
+
+        <Footer />
       </div>
     )
   }
