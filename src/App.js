@@ -7,11 +7,12 @@ import Footer from './components/Footer/Footer';
 //OLD
 //import SearchBar from './components/SearchBar/SearchBar';
 //import AlbumList from './components/AlbumList/AlbumList';
-import SongList from './components/SongList/SongList';
+//import SongList from './components/SongList/SongList';
 
 //NEW
 import SearchPage from './components/SearchPage/SearchPage';
 import ResultsPage from './components/ResultsPage/ResultsPage';
+import AlbumPage from './components/AlbumPage/AlbumPage';
 
 import './App.css'
 
@@ -25,9 +26,6 @@ const searchURL = "https://api.spotify.com/v1/search?q="
 const scopes = [
 
 ];
-
-let vh = window.innerHeight * 0.01;
-document.body.style.setProperty('--vh', `${vh}px`);
 
 // hash url
 const hash = window.location.hash
@@ -51,6 +49,7 @@ class App extends React.Component {
       token: null,
       results: [],
       term: '',
+      album: '',
       tracks: [],
     }
 
@@ -97,7 +96,8 @@ class App extends React.Component {
   // go from album screen to results screen
   albumToResults() {
     this.setState({
-      tracks: ''
+      tracks: '',
+      album: '',
     });
   }
 
@@ -115,7 +115,7 @@ class App extends React.Component {
     let _tracks = [];
     let _token = this.state.token;
     let albumTracks = $.ajax({
-      url: `https://api.spotify.com/v1/albums/${album}/tracks`,
+      url: `https://api.spotify.com/v1/albums/${album.id}/tracks`,
       type: "GET",
       beforeSend: (xhr) => {
         xhr.setRequestHeader("Authorization", "Bearer " + _token)
@@ -154,7 +154,10 @@ class App extends React.Component {
           })
         }
 
-        this.setState({ tracks: _tracks });
+        this.setState({ 
+          tracks: _tracks,
+          album: album,
+        });
       });
     });
   }
@@ -191,12 +194,11 @@ class App extends React.Component {
 
         {/* SHOW ALBUM PAGE */}
         {this.state.tracks.length > 0 && (
-          <div>
-            <SongList
+            <AlbumPage
               tracks={this.state.tracks}
+              album={this.state.album}
               goBack={this.albumToResults}
             />
-          </div>
         )}
 
         <Footer />

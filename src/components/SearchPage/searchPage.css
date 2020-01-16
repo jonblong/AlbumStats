@@ -4,6 +4,9 @@
 
     display: flex;
     justify-content: center;
+
+    height: calc(100vh - 150px);
+    height: calc(var(--vh, 1vh) * 100 - 150px);
 }
 
 input[type=text] {

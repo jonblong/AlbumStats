@@ -1,8 +1,5 @@
 #ResultsPage {
-    flex-grow: 1;
     background-color: #dec056;
-    height: 100%;
-    overflow-y: auto;
 
     display: flex;
     flex-direction: column;
@@ -39,14 +36,13 @@
 }
 
 #results-grid {
-    flex-grow: 1;
     width: calc(100% - 50px);
     padding-left: 50px;
+
 
     margin-top: 10px; 
     margin-left: auto;
     margin-right: auto;
-    overflow-y: auto;
 
     font-size: 16px;
 
@@ -61,6 +57,7 @@
 .album-card img{
     width: 100%;
     height: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 @media only screen and (max-width: 920px) {
@@ -82,5 +79,17 @@
 
     #results-head {
         font-size: 18px;
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+
+    #back-button {
+        background-color: #242423;
+        color: #dec056;
+        padding: 2px 8px 3px 8px;
+        font-size: 18px;
+        border-radius: 100px;
+        cursor: pointer;
+        margin-right: 10px;
     }
 }

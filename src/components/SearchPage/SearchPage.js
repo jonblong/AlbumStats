@@ -11,6 +11,11 @@ class SearchPage extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentDidMount() {
+        let vh = window.innerHeight * 0.01;
+        document.getElementById('SearchPage').style.setProperty('--vh', `${vh}px`);
+    }
+
     // fired whenever the textbox changes
     handleChange(event) {
         this.setState({ value: event.target.value });

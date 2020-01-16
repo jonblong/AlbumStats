@@ -16,7 +16,7 @@ const ResultsPage = (props) => {
             </div>
             <div id="results-grid">
                 {props.albums.map((a, i) => (
-                    <div className='album-card' onClick={() => props.getTracks(a.id)}>
+                    <div className='album-card' onClick={() => props.getTracks(a)}>
                         <img src={a.images[0].url} width='300px' height='300px' alt='album art'/>
                         <p><b>{truncateString(a.name, 20)}</b></p>
                         <p>{truncateString(a.artists[0].name, 25)}</p>
