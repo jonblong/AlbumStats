@@ -1,5 +1,5 @@
 import React from 'react';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
+import { ResponsiveContainer, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 import './albumPage.css';
 
 import TrackList from './../TrackList/TrackList';
@@ -53,14 +53,18 @@ function AlbumPage(props) {
                     <div id='chart-button' className={mode ? 'active' : ''} onClick={() => setMode(true)}>Chart View</div>
                 </div>
                 {mode && (
-                    <LineChart width={800} height={300} data={trackDataList} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-                        <Line type='monotone' dataKey='valence' stroke='#242423' />
-                        <Line type='monotone' dataKey='energy' stroke='#ff9900' />
-                        <Line type='monotone' dataKey='danceability' stroke='#3299bb' />
-                        <CartesianGrid vertical={false} stroke='#424242' strokeDasharray="5 5"/>
-                        <YAxis type='number' domain={[0, 1]}/>
-                        <Tooltip content={<SongTooltip />}/>
-                    </LineChart>
+                  <div id='chart-container'>
+                    <ResponsiveContainer width='100%' height='100%'>
+                      <LineChart className='chart' data={trackDataList} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+                          <Line type='monotone' dataKey='valence' stroke='#242423' />
+                          <Line type='monotone' dataKey='energy' stroke='#ff9900' />
+                          <Line type='monotone' dataKey='danceability' stroke='#3299bb' />
+                          <CartesianGrid vertical={false} stroke='#424242' strokeDasharray="5 5"/>
+                          <YAxis type='number' domain={[0, 1]}/>
+                          <Tooltip content={<SongTooltip />}/>
+                      </LineChart>
+                    </ResponsiveContainer> 
+                  </div>
                 )}
 
                 {!mode && (

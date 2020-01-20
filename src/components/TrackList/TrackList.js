@@ -16,9 +16,9 @@ const TrackList = (props) => {
                     <div className={`track color${i%2 + 1}`}>
                         <p className='track-stat track-num'>{i+1}</p>
                         <p className='track-stat track-name'>{track.name}</p>
-                        <p className='track-stat track-valence'>{track.valence}</p>
-                        <p className='track-stat track-energy'>{track.energy}</p>
-                        <p className='track-stat track-dance'>{track.danceability}</p>
+                        <p className='track-stat track-valence'>{Math.ceil(track.valence * 100)}%</p>
+                        <p className='track-stat track-energy'>{Math.ceil(track.energy * 100)}%</p>
+                        <p className='track-stat track-dance'>{Math.ceil(track.danceability * 100)}%</p>
                     </div>
                 ))}
             </div>

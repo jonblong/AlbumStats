@@ -33,6 +33,7 @@
 #album-info {
     width: 500px;
     flex: 2;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
 }
@@ -71,4 +72,49 @@
 #charts {
     flex: 3;
     margin-top: 30px;
+}
+
+#chart-container {
+  height: 300px;
+  width: 600px;
+}
+
+@media only screen and (max-width: 500px) {
+  #AlbumPage {
+    flex-direction: column;
+  }
+
+  #album-info {
+    flex: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .chart {
+    width: 300px;
+  }
+
+  #album-art {
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  #album-name {
+    font-weight: bold;
+    font-size: 28px;
+  }
+
+  #chart-container {
+    height: 200px;
+    width: 350px;
+  }
+
+  #artist-name,
+  #date-num {
+    font-size: 16px;
+  }
 }
