@@ -30,11 +30,11 @@ const hash = window.location.hash
     }
     return initial;
   }, {});
-
+console.log(window.location);
 window.location.hash = "";
 
 function VibeCheck() {
-  const states = {
+  const modes = {
     LOGIN:   'login',
     SEARCH:  'search',
     RESULTS: 'results',
@@ -46,15 +46,16 @@ function VibeCheck() {
   const [tracks, setTracks]   = React.useState([]);
   const [album, setAlbum]     = React.useState('');
   const [searchTerm, setSearchTerm] = React.useState('');
-  const [state, setState] = React.useState(states.LOGIN);
+  const [mode, setMode] = React.useState(null);
 
   React.useEffect(() => {
     let _token = hash.access_token;
-    if (_token && token != null) {
+    console.log(window.location);
+    if (_token) {
       setToken(_token);
-      setState(states.SEARCH);
+      setMode(modes.SEARCH);
     }
-  })
+  }, []);
 
   // search albums for term, return list of albums
   function searchForAlbum(album) {
@@ -71,7 +72,7 @@ function VibeCheck() {
         console.log(data)
         setResults(data.albums.items);
         setSearchTerm(album);
-        setState(states.RESULTS);
+        setMode(modes.RESULTS);
       },
       error: (e) => {
         console.log(e);
@@ -124,18 +125,19 @@ function VibeCheck() {
 
         setTracks(_tracks);
         setAlbum(album);
+        setMode(modes.ALBUM);
       });
     });
   }
 
   function albumToResults() {
-    setState(states.RESULTS);
+    setMode(modes.RESULTS);
     setAlbum('');
     setTracks([]);
   }
 
   function resultsToSearch() {
-    setState(states.SEARCH);
+    setMode(modes.SEARCH);
     setResults([]);
     setTracks([]);
     setSearchTerm('');
@@ -143,7 +145,11 @@ function VibeCheck() {
 
   return (
     <div id='App'>
-      <Header state={state} />
+      <Header 
+        mode={mode}
+        aToR={albumToResults}
+        rToS={resultsToSearch}
+      />
 
       {!token && (
           <a
@@ -153,13 +159,13 @@ function VibeCheck() {
           </a>
         )}
 
-        {state === states.SEARCH && (
+        {mode === modes.SEARCH && (
           <SearchPage
             search={searchForAlbum}
           />
         )}
 
-        {state === states.RESULTS && (
+        {mode === modes.RESULTS && (
           <ResultsPage
             results={results}
             searchTerm={searchTerm}
@@ -167,7 +173,7 @@ function VibeCheck() {
           />
         )}
 
-        {state === states.ALBUM && (
+        {mode === modes.ALBUM && (
           <AlbumPage
             tracks={tracks}
             album={album}

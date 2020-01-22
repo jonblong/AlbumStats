@@ -9,11 +9,20 @@ class SearchPage extends React.Component {
     
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.resizeComponent = this.resizeComponent.bind(this);
+    }
+
+    resizeComponent() {
+        document.getElementById('SearchPage').setAttribute('style', `min-height: ${window.innerHeight - 150}px`);
     }
 
     componentDidMount() {
-        let vh = window.innerHeight * 0.01;
-        document.getElementById('SearchPage').style.setProperty('--vh', `${vh}px`);
+        document.getElementById('SearchPage').setAttribute('style', `min-height: ${window.innerHeight - 150}px`);
+        window.addEventListener('resize', this.resizeComponent);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.resizeComponent);
     }
 
     // fired whenever the textbox changes
@@ -23,7 +32,7 @@ class SearchPage extends React.Component {
     
     // fired when the text is 'submitted'
     handleSubmit(event) {
-        this.props.searchForAlbum(this.state.value);
+        this.props.search(this.state.value);
         event.preventDefault();
     }
 

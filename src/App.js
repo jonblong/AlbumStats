@@ -40,6 +40,7 @@ const hash = window.location.hash
   }, {});
 
 window.location.hash = "";
+console.log(hash)
 
 class App extends React.Component {
   // constructor (duh)
@@ -62,6 +63,7 @@ class App extends React.Component {
 
   // sets token
   componentDidMount() {
+    console.log(hash);
     let _token = hash.access_token;
     if (_token) {
       this.setState({
