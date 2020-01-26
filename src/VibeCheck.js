@@ -13,7 +13,8 @@ export const authEndpoint = 'https://accounts.spotify.com/authorize';
 
 // app data
 const clientID = "75866d496692487bad2a4d1c7eeb8bca";
-const redirectUri = "http://localhost:3000";
+const testRedirectUri = "http://localhost:3000";
+const buildRedirectUri = "https://jonlong-vibecheck.netlify.com/"
 const searchURL = "https://api.spotify.com/v1/search?q="
 const scopes = [
 
@@ -154,7 +155,7 @@ function VibeCheck() {
 
       {!token && (
           <a
-            href={`${authEndpoint}?client_id=${clientID}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`}
+            href={`${authEndpoint}?client_id=${clientID}&redirect_uri=${buildRedirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`}
           >
             Login to Spotify
           </a>
