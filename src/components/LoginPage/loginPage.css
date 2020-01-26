@@ -1,0 +1,19 @@
+#LoginPage {
+    background-color: #dec056;
+    color: #242423;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#description-text {
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+#description-text p {
+    margin-top: 10px;
+}
+
+h1 {
+    margin-bottom: 10px;
+}

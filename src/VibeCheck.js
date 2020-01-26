@@ -4,6 +4,7 @@ import './App.css'
 
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import LoginPage from './components/LoginPage/LoginPage';
 import SearchPage from './components/SearchPage/SearchPage';
 import ResultsPage from './components/ResultsPage/ResultsPage';
 import AlbumPage from './components/AlbumPage/AlbumPage';
@@ -154,11 +155,12 @@ function VibeCheck() {
       />
 
       {!token && (
-          <a
-            href={`${authEndpoint}?client_id=${clientID}&redirect_uri=${buildRedirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`}
-          >
-            Login to Spotify
-          </a>
+        <LoginPage
+          authEndpoint={authEndpoint}
+          client_id={clientID}
+          redirectUri={buildRedirectUri}
+          scopes={scopes}
+      />
         )}
 
         {mode === modes.SEARCH && (
