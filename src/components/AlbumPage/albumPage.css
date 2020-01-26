@@ -1,120 +1,101 @@
 #AlbumPage {
-    display: flex;
-
     background-color: #dec056;
-    min-height: calc(var(--vh, 1vh) * 100 - 150px);
-}
-
-#view-controller {
     display: flex;
-    margin-left: 50px;
-    margin-bottom: 10px;
+    flex-direction: column;
 
     color: #242423;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-weight: bold;
-}
-
-.active {
-    text-decoration: underline;
-}
-
-#track-button {
-    margin-right: 30px;
-}
-
-#album-art {
-    width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #album-info {
-    width: 500px;
-    flex: 2;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-#album-details {
-    color: #242423;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    margin-left: 20px;
-    text-align: center;
-
+    flex: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+}
+
+#album-art {
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px 0 rgba(20, 13, 13, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#album-details {
+    text-align: center;
 }
 
 #album-name {
     font-weight: bold;
-    font-size: 48px;
+    font-size: 28px;
 }
 
 #artist-name,
 #date-num {
-    font-size: 24px;
+    font-size: 16px;
 }
 
 .byline {
     opacity: 0.5;
 }
 
-.song-tooltip {
-    background-color: rgba(200, 200, 200, 0.75);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 10px;
-}
-
-#charts {
-    flex: 3;
-    margin-top: 30px;
-}
-
-#chart-container {
-  height: 300px;
-  width: 600px;
-}
-
-@media only screen and (max-width: 500px) {
-  #AlbumPage {
-    flex-direction: column;
-  }
-
-  #album-info {
-    flex: 0;
+#view-controller {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-
-  .chart {
-    width: 300px;
-  }
-
-  #album-art {
-    width: 150px;
-    margin-left: auto;
-    margin-right: auto;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  }
-
-  #album-name {
+    justify-content: center;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-top: 25px;
+    margin-bottom: 15px;
     font-weight: bold;
-    font-size: 28px;
-  }
+}
 
-  #chart-container {
-    height: 200px;
-    width: 350px;
-  }
+#view-controller div{
+    cursor: pointer;
+    padding: 5px 5px 5px 5px;
+    border: 1px solid #242423;
+}
 
-  #artist-name,
-  #date-num {
-    font-size: 16px;
-  }
+#track-button {
+    border-radius: 5px 0 0 5px;
+}
+
+#chart-button {
+    border-radius: 0 5px 5px 0;
+}
+
+.active {
+    background-color: #242423;
+    color: #dec056;;
+}
+
+@media only screen and (min-width: 800px) {
+    #album-info {
+        flex-direction: row;
+    }
+
+    #album-art {
+        width: 300px;
+        margin-right: 15px;
+        margin-left: 30px;
+    }
+
+    #album-details {
+        text-align: left;
+    }
+
+    #album-name {
+        font-weight: bold;
+        font-size: 36px;
+    }
+    
+    #artist-name,
+    #date-num {
+        font-size: 24px;
+    }
+
+    #view-controller {
+        width: 300px;
+    }
 }

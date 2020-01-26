@@ -1,38 +1,36 @@
 import React from 'react';
-import { ResponsiveContainer, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 import './albumPage.css';
-
+import ChartView from './../ChartView/ChartView';
 import TrackList from './../TrackList/TrackList';
 
 function AlbumPage(props) {
     let trackDataList = [];
     props.tracks.forEach((track, i) => {
         trackDataList.push({
-            name: track.name,
-            valence: track.valence,
+            name:         track.name,
+            number:       track.number,
+            valence:      track.valence,
             acousticness: track.acousticness,
-            energy: track.energy,
+            energy:       track.energy,
             danceability: track.danceability,
+            tempo:        track.tempo,
         });
     });
 
-    const [mode, setMode] = React.useState(false);
-
-    const SongTooltip = ({ active, payload, label }) => {
-        //console.log(payload);
-        if (active) {
-            return (
-                <div className='song-tooltip'>
-                    <p className='tooltip-song-name'>{payload[0].payload.name}</p>
-                    <p className='tooltip-song-valence'>Valence: {payload[0].payload.valence}</p>
-                    <p className='tooltip-song-valence'>Energy: {payload[0].payload.energy}</p>
-                    <p className='tooltip-song-valence'>Danceability: {payload[0].payload.danceability}</p>
-                </div>
-            )
-        }
-
-        return null;
+    function resizeComponent() {
+        document.getElementById('AlbumPage').setAttribute('style', `min-height: ${window.innerHeight - 150}px`);
     }
+
+    React.useEffect(() => {
+        document.getElementById('AlbumPage').setAttribute('style', `min-height: ${window.innerHeight - 150}px`);
+        window.addEventListener('resize', resizeComponent);
+
+        return function cleanup() {
+            window.removeEventListener('resize', resizeComponent);
+        }
+    }, []);
+
+    const [mode, setMode] = React.useState(false);
 
     return(
         <div id="AlbumPage">
@@ -47,24 +45,13 @@ function AlbumPage(props) {
                     <p id='date-num'>{props.album.release_date.slice(0,4)} &#183; {props.album.total_tracks} songs</p>
                 </div>
             </div>
-            <div id='charts'>
-                <div id='view-controller'>
+            <div id='view-controller'>
                     <div id='track-button' className={mode ? '' : 'active'} onClick={() => setMode(false)}>Tracklist View</div>
                     <div id='chart-button' className={mode ? 'active' : ''} onClick={() => setMode(true)}>Chart View</div>
                 </div>
+            <div id='charts'>
                 {mode && (
-                  <div id='chart-container'>
-                    <ResponsiveContainer width='100%' height='100%'>
-                      <LineChart className='chart' data={trackDataList} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-                          <Line type='monotone' dataKey='valence' stroke='#242423' />
-                          <Line type='monotone' dataKey='energy' stroke='#ff9900' />
-                          <Line type='monotone' dataKey='danceability' stroke='#3299bb' />
-                          <CartesianGrid vertical={false} stroke='#424242' strokeDasharray="5 5"/>
-                          <YAxis type='number' domain={[0, 1]}/>
-                          <Tooltip content={<SongTooltip />}/>
-                      </LineChart>
-                    </ResponsiveContainer> 
-                  </div>
+                  <ChartView trackData={trackDataList} />
                 )}
 
                 {!mode && (

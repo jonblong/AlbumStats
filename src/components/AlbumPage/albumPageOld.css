@@ -1,0 +1,119 @@
+#AlbumPage {
+    display: flex;
+
+    background-color: #dec056;
+    min-height: calc(var(--vh, 1vh) * 100 - 150px);
+}
+
+#view-controller {
+    display: flex;
+    margin-left: 50px;
+    margin-bottom: 10px;
+
+    color: #242423;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+}
+
+.active {
+    text-decoration: underline;
+}
+
+#track-button {
+    margin-right: 30px;
+}
+
+#album-art {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 8px 0 rgba(20, 13, 13, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#album-info {
+    width: 500px;
+    flex: 2;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#album-details {
+    color: #242423;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#album-name {
+    font-weight: bold;
+    font-size: 48px;
+}
+
+#artist-name,
+#date-num {
+    font-size: 24px;
+}
+
+.byline {
+    opacity: 0.5;
+}
+
+.song-tooltip {
+    background-color: rgba(200, 200, 200, 0.75);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 10px;
+}
+
+#charts {
+    flex: 3;
+    margin-top: 30px;
+}
+
+#chart-container {
+  height: 300px;
+  width: 600px;
+}
+
+@media only screen and (max-width: 500px) {
+  #AlbumPage {
+    flex-direction: column;
+  }
+
+  #album-info {
+    flex: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .chart {
+    width: 300px;
+  }
+
+  #album-art {
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  #album-name {
+    font-weight: bold;
+    font-size: 28px;
+  }
+
+  #chart-container {
+    height: 200px;
+    width: 350px;
+  }
+
+  #artist-name,
+  #date-num {
+    font-size: 16px;
+  }
+}

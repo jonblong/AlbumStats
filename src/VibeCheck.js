@@ -114,12 +114,13 @@ function VibeCheck() {
           let currentTrack = featureData.audio_features[i]
           _tracks.push({
             name:             trackData.items[i].name,
-            danceability:     currentTrack.danceability,
-            energy:           currentTrack.energy,
-            acousticness:     currentTrack.acousticness,
-            instrumentalness: currentTrack.instrumentalness,
-            valence:          currentTrack.valence,
-            tempo:            currentTrack.tempo + ' BPM',
+            number:           i+1,
+            danceability:     Math.round(currentTrack.danceability * 100),
+            energy:           Math.round(currentTrack.energy * 100),
+            acousticness:     Math.round(currentTrack.acousticness * 100),
+            instrumentalness: Math.round(currentTrack.instrumentalness * 100),
+            valence:          Math.round(currentTrack.valence * 100),
+            tempo:            Math.round(currentTrack.tempo),
           })
         }
 

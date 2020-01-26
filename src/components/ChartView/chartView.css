@@ -1,0 +1,90 @@
+#chart-container {
+    width: 100%;
+    height: 200px;
+
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#chart-controls {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+}
+
+.song-tooltip {
+    background-color: rgba(200, 200, 200, 0.75);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 10px;
+}
+
+.valence-checkbox:checked {
+    background-color: #3299bb;
+}
+
+.checkbox {
+    margin-top: 5px;
+    appearance: none;
+    background-color: #fafafa;
+	border: 1px solid #cacece;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+	padding: 9px;
+	border-radius: 3px;
+	display: inline-block;
+	position: relative;
+}
+
+.checkbox:active, .checkbox:checked:active {
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+.checkbox:checked {
+	border: 1px solid #adb8c0;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+	color: #99a1a7;
+}
+
+#valence-checkbox:checked {
+    background-color: #3299bb;
+}
+
+#danceability-checkbox:checked {
+    background-color: #ff9900;
+}
+
+#tempo-checkbox:checked {
+    background-color: #424242;
+}
+
+@media only screen and (min-width: 1000px) {
+    #chart-container {
+        width: 75%;
+        height: 300px;
+    }
+
+    #chart-view {
+        display: flex;
+    }
+
+    #chart-controls {
+        width: 200px;
+        justify-content: center;
+    }
+}
+
+@media only screen and (min-width: 1400px) {
+    #chart-container {
+        width: 75%;
+        height: 500px;
+    }
+
+    #chart-view {
+        display: flex;
+    }
+
+    #chart-controls {
+        width: 300px;
+        justify-content: center;
+    }
+}

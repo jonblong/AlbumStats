@@ -19,5 +19,11 @@
 
 #back {
   position: absolute;
-  left: 10px;
+  left: 20px;
+}
+
+#back img {
+  margin-top: 5px;
+  width: 30px;
+  cursor: pointer;
 }
