@@ -14,7 +14,7 @@ export const authEndpoint = 'https://accounts.spotify.com/authorize';
 // app data
 const clientID = "75866d496692487bad2a4d1c7eeb8bca";
 const testRedirectUri = "http://localhost:3000";
-const buildRedirectUri = "https://jonlong-vibecheck.netlify.com/"
+const buildRedirectUri = "https://jonlong-vibecheck.netlify.com"
 const searchURL = "https://api.spotify.com/v1/search?q="
 const scopes = [
 
