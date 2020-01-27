@@ -13,7 +13,7 @@ import { render } from '@testing-library/react';
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 
 // app data
-const clientID = "75866d496692487bad2a4d1c7eeb8bca";
+const clientID = process.env.REACT_APP_CLIENT_ID;
 const testRedirectUri = "http://localhost:3000";
 const buildRedirectUri = "https://jonlong-vibecheck.netlify.com"
 const searchURL = "https://api.spotify.com/v1/search?q="
@@ -103,6 +103,8 @@ function VibeCheck() {
         }
       }
 
+      console.log(trackIDs);
+
       let trackFeatures = $.ajax({
         url: `https://api.spotify.com/v1/audio-features/?ids=${trackIDs}`,
         type: "GET",
@@ -111,8 +113,14 @@ function VibeCheck() {
         }
       })
 
+      trackFeatures.fail((err) => {
+        console.log(err);
+      })
+
       trackFeatures.done((featureData) => {
+        console.log("FEATUREDATA");
         for (let i = 0; i < featureData.audio_features.length; i++) {
+          console.log(featureData);
           let currentTrack = featureData.audio_features[i]
           _tracks.push({
             name:             trackData.items[i].name,
@@ -158,7 +166,7 @@ function VibeCheck() {
         <LoginPage
           authEndpoint={authEndpoint}
           client_id={clientID}
-          redirectUri={buildRedirectUri}
+          redirectUri={testRedirectUri}
           scopes={scopes}
       />
         )}

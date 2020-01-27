@@ -38,7 +38,7 @@ function ResultsPage(props) {
                             <p>{truncateString(a.artists[0].name, 25)}</p>
                         </div>
                         <div className='end'>
-                            <img src={end}/>
+                            <img src={end} alt={a.name}/>
                         </div>
                     </div>
                 ))}
