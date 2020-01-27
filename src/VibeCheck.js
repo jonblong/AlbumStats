@@ -12,7 +12,7 @@ import { render } from '@testing-library/react';
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 
-// app data
+// app data (is this even working?)
 const clientID = `${process.env.REACT_APP_CLIENT_ID}`;
 const testRedirectUri = "http://localhost:3000";
 const buildRedirectUri = "https://jonlong-vibecheck.netlify.com"
