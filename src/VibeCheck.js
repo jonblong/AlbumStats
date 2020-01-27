@@ -166,7 +166,7 @@ function VibeCheck() {
         <LoginPage
           authEndpoint={authEndpoint}
           client_id={clientID}
-          redirectUri={testRedirectUri}
+          redirectUri={buildRedirectUri}
           scopes={scopes}
       />
         )}
