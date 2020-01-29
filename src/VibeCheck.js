@@ -15,7 +15,7 @@ export const authEndpoint = 'https://accounts.spotify.com/authorize';
 // app data (is this even working?)
 const clientID = `${process.env.REACT_APP_CLIENT_ID}`;
 const testRedirectUri = "http://localhost:3000";
-const buildRedirectUri = "https://jonlong-vibecheck.netlify.com"
+const buildRedirectUri = "https://vibecheckapp.com";
 const searchURL = "https://api.spotify.com/v1/search?q="
 const scopes = [
 
