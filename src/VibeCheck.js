@@ -4,40 +4,18 @@ import './App.css'
 
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import LoginPage from './components/LoginPage/LoginPage';
 import SearchPage from './components/SearchPage/SearchPage';
 import ResultsPage from './components/ResultsPage/ResultsPage';
 import AlbumPage from './components/AlbumPage/AlbumPage';
 import { render } from '@testing-library/react';
 
-export const authEndpoint = 'https://accounts.spotify.com/authorize';
-
 // app data (is this even working?)
 const clientID = `${process.env.REACT_APP_CLIENT_ID}`;
-const testRedirectUri = "http://localhost:3000";
-const buildRedirectUri = "https://vibecheckapp.com";
+const clientSecret = `${process.env.REACT_APP_CLIENT_SECRET}`;
 const searchURL = "https://api.spotify.com/v1/search?q="
-const scopes = [
-
-];
-
-// hash url
-const hash = window.location.hash
-  .substring(1)
-  .split("&")
-  .reduce(function(initial, item) {
-    if (item) {
-      let parts = item.split("=");
-      initial[parts[0]] = decodeURIComponent(parts[1]);
-    }
-    return initial;
-  }, {});
-console.log(window.location);
-window.location.hash = "";
 
 function VibeCheck() {
   const modes = {
-    LOGIN:   'login',
     SEARCH:  'search',
     RESULTS: 'results',
     ALBUM:   'album'
@@ -51,12 +29,24 @@ function VibeCheck() {
   const [mode, setMode] = React.useState(null);
 
   React.useEffect(() => {
-    let _token = hash.access_token;
-    console.log(window.location);
-    if (_token) {
-      setToken(_token);
-      setMode(modes.SEARCH);
-    }
+    $.ajax({
+      url: `https://accounts.spotify.com/api/token`,
+      type: "POST",
+      beforeSend: (xhr) => {
+        xhr.setRequestHeader("Authorization", "Basic " + (new Buffer(clientID + ':' + clientSecret).toString('base64')))
+      },
+      data: {
+        grant_type: "client_credentials",
+      },
+      dataType: 'json',
+      success: (data) => {
+        setToken(data.access_token);
+        setMode(modes.SEARCH);
+      },
+      error: (e) => {
+        console.log(e);
+      }
+    });
   }, []);
 
   // search albums for term, return list of albums
@@ -161,15 +151,6 @@ function VibeCheck() {
         aToR={albumToResults}
         rToS={resultsToSearch}
       />
-
-      {!token && (
-        <LoginPage
-          authEndpoint={authEndpoint}
-          client_id={clientID}
-          redirectUri={buildRedirectUri}
-          scopes={scopes}
-      />
-        )}
 
         {mode === modes.SEARCH && (
           <SearchPage
