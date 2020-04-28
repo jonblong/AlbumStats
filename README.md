@@ -1,4 +1,4 @@
-#VibeCheck
+# VibeCheck
 
 Have you ever wanted to know why Channel Orange sounds so good? Curious as to why Lana del Rey makes you want to cry? Interested in the correlation between listening to DRAM and getting lit? Then boy (or girl) do I have the app for you!
 
